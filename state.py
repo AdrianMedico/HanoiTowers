@@ -44,7 +44,7 @@ class State:
         :param idx: Index of the tower.
         :return: The tower corresponding to the idx.
         """
-        raise NotImplementedError()
+        return self.towers[idx]
 
     def __repr__(self):
         """
