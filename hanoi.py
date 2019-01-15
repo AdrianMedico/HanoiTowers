@@ -22,8 +22,8 @@ class HanoiGame:
         :param n_discs: Number of disks for this game.
         :param n_towers: Number of towers for this game. Default: 3
         """
-        min_discs = 0
-        min_towers = 3
+        self.min_discs = 0
+        self.min_towers = 3
 
         # Steps:
         # 1.- Check the parameters (Add the code after this comment)
@@ -33,13 +33,15 @@ class HanoiGame:
             raise HanoiException("The number of towers should be at least 3")
 
         # 2.- Initialize the structure attributes (Add the code after this comment)
-        initial_tower = Tower()
-        auxiliar_tower = Tower()
-        distination_tower = Tower()
+        self.initial_tower = Tower()
+        self.auxiliar_tower = Tower()
+        self.destination_tower = Tower()
+
+        # TODO game_state = State()
 
         # 3.- Initialize the towers (Add the code after this comment)
         for disc in range(n_discs, 1):
-            initial_tower.push_disc(disc)
+            self.initial_tower.push_disc(disc)
 
         # 4.- Solve and store the optimal solution
         self._solve()
