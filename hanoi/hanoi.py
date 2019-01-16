@@ -11,7 +11,7 @@ class HanoiGame:
     """
     Main class for management of the data structures and moves of the game.
     """
-
+ # This is a test
     def __init__(self, n_discs, n_towers=3):
         """
         Initializes the game with n_discs and n_towers, which defaults to 3.
