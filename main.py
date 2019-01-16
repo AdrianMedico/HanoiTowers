@@ -1,5 +1,5 @@
 from hanoi import HanoiGame
-from hanoi_exception import HanoiException
+from hanoi.hanoi_exception import HanoiException
 
 
 def get_int_value(message, range_start, range_end):

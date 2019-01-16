@@ -22,7 +22,6 @@ class Tower:
             return True
         else:
             return False
-        # raise NotImplementedError()
 
     def size(self):
         """
@@ -31,7 +30,6 @@ class Tower:
         :return: The size (number of discs) of the tower.
         """
         return len(self.discs)
-        # raise NotImplementedError()
 
     def pop_disc(self):
         """
@@ -41,7 +39,6 @@ class Tower:
         :return: The disc removed from the top of the tower.
         """
         return self.discs.pop()
-        # raise NotImplementedError()
 
     '''
         Inserta un disco encima de la torre.
@@ -57,7 +54,6 @@ class Tower:
             raise HanoiException("The disc is bigger than the current top disc")
         else:
             self.discs.append(disc)
-        # raise NotImplementedError()
 
     def as_list(self):
         """
@@ -67,7 +63,6 @@ class Tower:
         :return: A list containing the discs of the tower.
         """
         return self.discs
-        # raise NotImplementedError()
 
     def __repr__(self):
         """
