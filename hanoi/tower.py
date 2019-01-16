@@ -71,15 +71,11 @@ class Tower:
 
         :return: A string with the internal representation of the state.
         """
+
+        tower_representation = ""
         for item in self.discs:
-            if len(item) > 0:
-                for j in item * 2:
-                    print('#', end='')
-                    if j == item:
-                        print("|")
-            else:
-                print("...|...")
-        raise NotImplementedError()
+            tower_representation += self.disc_as_string(item)
+        return tower_representation
 
     def __str__(self):
         """
@@ -89,3 +85,15 @@ class Tower:
         """
 
         raise NotImplementedError()
+
+    def disc_as_string(self, size):
+        disc = ''
+        if size > 0:
+            for j in range(size) * 2:
+                disc += '#'
+                if j == size:
+                    disc += '|'
+            disc += '\n'
+        else:
+            disc = "...|...\n"
+
