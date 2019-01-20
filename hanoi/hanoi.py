@@ -137,7 +137,14 @@ class HanoiGame:
         :param depth: Depth of the recursion call. Useful as information for the optimal state.
         """
         # TODO
-        raise NotImplementedError()
+        if n_discs == 0:
+            self.states.append(self.move(source, target))
+
+        else:
+            self._solve_rec(n_discs - 1, source, aux, target, depth + 1)
+            self.states.append(self.move(source, target, self.states[len(self.states)].move_id + 1, depth))
+            self._solve_rec(n_discs - 1, aux, target, source, depth + 1)
+
 
     def print_optimal_state(self, step):
         """
