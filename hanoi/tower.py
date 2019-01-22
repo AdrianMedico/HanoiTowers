@@ -84,7 +84,7 @@ class Tower:
         :return: A string with the representation of the state in the requested format
         """
 
-        return str(self.disc)
+        return str(self.discs)
 
     def disc_as_string(self, size):
         disc = ''

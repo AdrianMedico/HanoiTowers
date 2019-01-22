@@ -42,7 +42,7 @@ class HanoiGame:
         self.towers[0] = self.fill_origin_tower(self.towers[0], n_discs)
 
         # 4.- Solve and store the optimal solution
-        self._solve()
+        #self._solve()
 
     def get_state(self, step):
         """
@@ -212,7 +212,7 @@ class HanoiGame:
 
         #for tower in self.states[len(self.states)]:
 
-        return str(self.discs)
+        return str(self.towers)
 
     def fill_origin_tower(self, tower, n_discs):
         """
