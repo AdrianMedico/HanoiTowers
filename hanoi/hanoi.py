@@ -166,6 +166,10 @@ class HanoiGame:
             # move tower of size n-1 from helper to target
             hanoi(n - 1, aux, source, target)
 
+            """
+            Realmente no estoy muy convencido de esta función pero por empezar con algo...
+            """
+
 
     def is_finished(self):
         """
