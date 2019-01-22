@@ -50,7 +50,7 @@ class Tower:
 
         :param disc: The disc to be added to the top of the tower.
         """
-        if self.discs[len(self.discs)] > disc:
+        if self.discs[len(self.discs)] < disc:
             raise HanoiException("The disc is bigger than the current top disc")
         else:
             self.discs.append(disc)
