@@ -56,6 +56,10 @@ class HanoiGame:
         length = len(self.steps)
         if step > length or step < 0:
             raise HanoiException("The introduced step should be between 0 and " + length)
+        """
+        En esta función falta que devuelva algo, solo tenemos  un condicional y una exception pero sin devolver nada.
+        """
+
 
     def get_n_discs(self):
         """
@@ -190,7 +194,7 @@ class HanoiGame:
 
         #for tower in self.states[len(self.states)]:
 
-        raise NotImplementedError()
+        return str(self.discs)
 
     def fill_origin_tower(self, tower, n_discs):
         """
