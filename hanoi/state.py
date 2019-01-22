@@ -61,5 +61,7 @@ class State:
 
         :return: A string with the representation of the state in the requested format
         """
-        return str(self.disc)
-
+        return str(self)
+    """
+    Falta rellenar este return, al lado del self debería ir alguna cosa más
+    """
