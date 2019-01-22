@@ -1,4 +1,4 @@
-from hanoi import HanoiGame
+from hanoi.hanoi import HanoiGame
 from hanoi.hanoi_exception import HanoiException
 
 

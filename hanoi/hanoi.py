@@ -4,14 +4,14 @@ from .hanoi_exception import HanoiException
 from .state import State
 from .tower import Tower
 
-logging.basicConfig(level = logging.INFO, format = '%(levelname)-10s  %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)-10s  %(message)s')
 
 
 class HanoiGame:
     """
     Main class for management of the data structures and moves of the game.
     """
- # This is a test
+
     def __init__(self, n_discs, n_towers=3):
         """
         Initializes the game with n_discs and n_towers, which defaults to 3.
@@ -35,17 +35,14 @@ class HanoiGame:
 
         # 2.- Initialize the structure attributes (Add the code after this comment)
         self.states = []  # Initialize the states list
-        # TODO game_state = State()
-
-        self.towers = [Tower(), Tower(), Tower()]
+        self.game_state = []
 
         # 3.- Initialize the towers (Add the code after this comment)
-        for disc in range(n_discs, 1):
-            self.towers[0].push_disc(disc)
-
+        self.towers = [Tower(), Tower(), Tower()]
+        self.towers[0] = self.fill_origin_tower(self.towers[0], n_discs)
 
         # 4.- Solve and store the optimal solution
-        # TODO self._solve()
+        self._solve()
 
     def get_state(self, step):
         """
@@ -101,30 +98,27 @@ class HanoiGame:
         if source is target:
             raise HanoiException("Source and origin should be different")
 
-        elif len(source) == 0:
+        elif source.size() == 0:
             return HanoiException("The origin is empty")
 
-        if not target.is_empty():
-            if source[len(source)] > target[len(target)]:
-                raise HanoiException("The disc should be ")
+        if not target.is_empty() and source[len(source)] > target[len(target)]:
+            raise HanoiException("The disc should be ")
         moved_disc = source.pop_disc()
         target.push_disc(moved_disc)
 
-        current_state = State(0, 0, moved_disc, source, target, self.towers, self.current_discs)
+        current_state = State(move_id, depth, moved_disc, source, target, self.towers, self.current_discs)
 
         return current_state
-
-
-
 
     def _solve(self):
         """
         Generates and stores the optimal solution, reinitializing the towers afterwards.
         """
 
-        # TODO to implement self._solve_rec()
+        self._solve_rec(self.current_discs, self.towers[0], self.towers[2], self.towers[1], 0)
 
-        raise NotImplementedError()
+        # Finally reinitialize the towers
+        self.towers = [Tower(), Tower(), Tower()]
 
     def _solve_rec(self, n_discs, source, target, aux, depth=0):
         """
@@ -136,7 +130,7 @@ class HanoiGame:
         :param aux: Tower to be used as auxiliary.
         :param depth: Depth of the recursion call. Useful as information for the optimal state.
         """
-        # TODO
+
         if n_discs == 0:
             self.states.append(self.move(source, target))
 
@@ -144,7 +138,6 @@ class HanoiGame:
             self._solve_rec(n_discs - 1, source, aux, target, depth + 1)
             self.states.append(self.move(source, target, self.states[len(self.states)].move_id + 1, depth))
             self._solve_rec(n_discs - 1, aux, target, source, depth + 1)
-
 
     def print_optimal_state(self, step):
         """
@@ -185,7 +178,7 @@ class HanoiGame:
 
         :return: A string with the internal representation of the game.
         """
-        # TODO
+
         raise NotImplementedError()
 
     def __str__(self):
@@ -194,8 +187,20 @@ class HanoiGame:
 
         :return: A string with the representation of the current state of the game in the requested format
         """
-        # TODO
+
+        #for tower in self.states[len(self.states)]:
+
         raise NotImplementedError()
 
+    def fill_origin_tower(self, tower, n_discs):
+        """
+        internal function that fill the origin tower with the number of discs that the user request
+        :param tower: the object tower
+        :param n_discs: the number of discs
+        :return: the tower filled with discs
+        """
+        for disc in range(n_discs, 1):
+            tower.push_disc(disc)
+        return tower
 
 
