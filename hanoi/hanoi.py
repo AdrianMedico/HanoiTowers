@@ -155,8 +155,17 @@ class HanoiGame:
         """
         Prints all the states of the optimal solution in the required format.
         """
-        # TODO
-        raise NotImplementedError()
+        if n > 0:
+            # move tower of size n - 1 to helper:
+            print_optimal_solution(n - 1, source, target, aux)
+            # move disk from source peg to target peg
+            if source[0]:
+                disk = source[0].pop()
+                print("moving " + str(disk) + " from " + source[1] + " to " + target[1])
+                target[0].append(disk)
+            # move tower of size n-1 from helper to target
+            hanoi(n - 1, aux, source, target)
+
 
     def is_finished(self):
         """
@@ -164,8 +173,13 @@ class HanoiGame:
 
         :return: True if the game is finished, False otherwise.
         """
-        # TODO
-        raise NotImplementedError()
+
+        """
+        No se como escribirlo en código, pero la idea que tengo es usar un if/else donde el if compruebe si la función 
+        finaliza donde debe finalizar haga un return True y de la misma con el else, si la función no acaba como debería
+        hacer un return False
+        """
+
 
     def get_current_state(self):
         """
