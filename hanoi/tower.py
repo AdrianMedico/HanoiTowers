@@ -83,7 +83,25 @@ class Tower:
 
         :return: A string with the representation of the state in the requested format
         """
+        relleno_puntos = 1
+        duplicar_almohadillas = 2
+        torre_prn = ""
+        print(T1)
+        puntos = (int(n_discs) * duplicar_almohadillas) + relleno_puntos  #
+        for torre in range(n_discs):  # Recorremos la tabla T1
 
+            linea_prn = ""  # Inicializamos la variable liena de impresión
+            for T in T1:  # Bucle para dibujar las torres
+                almohadilla = (int(T[torre]) * duplicar_almohadillas) + 1  #
+                dibuja_disco = "|".center(almohadilla, "#").center(puntos, ".")  # Dibuja la torre con o sin discos
+                linea_prn = linea_prn + "  " + dibuja_disco + "  "  # Concatena una linea de cada torre para ser impresa en pantalla
+                print(linea_prn)
+
+            for i in range(3):
+                torre_prn = torre_prn + "  " + ("Torre" + str(i + 1)).center(puntos) + "  "
+            print(torre_prn)
+
+               
         return str(self.discs)
 
     def disc_as_string(self, size):
