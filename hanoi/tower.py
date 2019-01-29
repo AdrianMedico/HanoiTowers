@@ -83,6 +83,9 @@ class Tower:
 
         :return: A string with the representation of the state in the requested format
         """
+
+
+       def disc_as_string(self, size):
         relleno_puntos = 1
         duplicar_almohadillas = 2
         torre_prn = ""
@@ -104,7 +107,10 @@ class Tower:
                
         return str(self.discs)
 
-    def disc_as_string(self, size):
+
+
+"""
+    def disc_as_string_2(self, size):
         disc = ''
         if size > 0:
             for j in range(size) * 2:
@@ -114,4 +120,4 @@ class Tower:
             disc += '\n'
         else:
             disc = "...|...\n"
-
+"""
