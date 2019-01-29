@@ -5,3 +5,4 @@ class HanoiException(Exception):
     game code.
     """
     pass
+

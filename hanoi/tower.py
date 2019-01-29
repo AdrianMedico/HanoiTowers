@@ -83,7 +83,7 @@ class Tower:
 
         :return: A string with the representation of the state in the requested format
         """
-
+    def disc_as_string(self,size):
         relleno_puntos = 1
         duplicar_almohadillas = 2
         torre_prn = ""
