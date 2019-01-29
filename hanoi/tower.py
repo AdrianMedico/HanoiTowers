@@ -105,7 +105,10 @@ class Tower:
                
         return str(self.discs)
 
-    def disc_as_string(self, size):
+
+
+"""
+    def disc_as_string_2(self, size):
         disc = ''
         if size > 0:
             for j in range(size) * 2:
@@ -115,4 +118,5 @@ class Tower:
             disc += '\n'
         else:
             disc = "...|...\n"
+"""
 
