@@ -34,7 +34,7 @@ class State:
         self.towers = []
 
         # How the towers will be stored? Directly? Is that a good idea?
-        raise NotImplementedError()
+        #raise NotImplementedError()
 
     def get_tower(self, idx):
         """
@@ -53,15 +53,29 @@ class State:
 
         :return: A string with the internal representation of the state.
         """
-        raise NotImplementedError()
+        rep = str(self.n_discs), self.towers.__str__(), str(self.depth), str(self.move_id), str(self.source), str(self.target)
+
+        return rep
 
     def __str__(self):
         """
         Returns a string with the representation of the state in the requested format.
 
         :return: A string with the representation of the state in the requested format
+
         """
-        return str(self)
-    """
-    Falta rellenar este return, al lado del self debería ir alguna cosa más
-    """
+
+        self.state_repr = ""
+
+        for i in range(self.n_discs - 1, -1, -1):  # foreach row
+            for tower in self.towers:  # foreach tower
+                if i >= len(tower.discs):
+                    self.state_repr += tower.fill_row(self.n_discs, 0)
+                    self.state_repr += " "
+                else:
+                    self.state_repr += tower.fill_row(self.n_discs, tower.discs[i])
+                    self.state_repr += " "
+
+            self.state_repr += '\n'
+
+        return self.state_repr
