@@ -1,4 +1,4 @@
-from .hanoi_exception import HanoiException
+from hanoi_exception import HanoiException
 
 
 class State:
