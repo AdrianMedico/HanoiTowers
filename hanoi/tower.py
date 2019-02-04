@@ -1,4 +1,4 @@
-#from .hanoi_exception import HanoiException
+from .hanoi_exception import HanoiException
 
 
 class Tower:
@@ -38,22 +38,27 @@ class Tower:
 
         :return: The disc removed from the top of the tower.
         """
-        return self.discs.pop()
+        if self.is_empty():
+            raise HanoiException("Empty tower")
+        else:
+            return self.discs.pop()
 
     '''
         Inserta un disco encima de la torre.
     '''
     def push_disc(self, disc):
         """
-        Adds a dis to the top of the tower.
+        Adds a disc to the top of the tower.
         Raises an HanoiException if the disc is bigger that the disc at the top of the tower.
 
         :param disc: The disc to be added to the top of the tower.
         """
-        if self.discs[len(self.discs)] < disc:
-            raise HanoiException("The disc is bigger than the current top disc")
-        else:
-            self.discs.append(disc)
+        length = len(self.discs)
+        if length != 0:
+            if self.discs[length-1] < disc:
+                raise HanoiException("The disc is bigger than the current top disc")
+
+        self.discs.append(disc)
 
     def as_list(self):
         """
@@ -71,52 +76,48 @@ class Tower:
 
         :return: A string with the internal representation of the state.
         """
+        pass
 
-        tower_representation = ""
-        for item in self.discs:
-            tower_representation += self.disc_as_string(item)
-        return tower_representation
-
-    def __str__(self):
+    def __str__(self, n_discs):
         """
-        Returns a string with the representation of the state in the requested format.
+        Returns a string with the representation of the tower in the requested format.
 
-        :return: A string with the representation of the state in the requested format
+        :return: A string with the representation of the tower in the requested format
         """
-    def disc_as_string(self,size):
-        relleno_puntos = 1
-        duplicar_almohadillas = 2
-        torre_prn = ""
-        print(T1)
-        puntos = (int(n_discs) * duplicar_almohadillas) + relleno_puntos  #
-        for torre in range(n_discs):  # Recorremos la tabla T1
 
-            linea_prn = ""  # Inicializamos la variable liena de impresión
-            for T in T1:  # Bucle para dibujar las torres
-                almohadilla = (int(T[torre]) * duplicar_almohadillas) + 1  #
-                dibuja_disco = "|".center(almohadilla, "#").center(puntos, ".")  # Dibuja la torre con o sin discos
-                linea_prn = linea_prn + "  " + dibuja_disco + "  "  # Concatena una linea de cada torre para ser impresa en pantalla
-                print(linea_prn)
+        self.tower_representation = ""
 
-            for i in range(3):
-                torre_prn = torre_prn + "  " + ("Torre" + str(i + 1)).center(puntos) + "  "
-            print(torre_prn)
- T1 = [[1,2,3,4],[0,0,0,0],[0,0,0,0]]
-               
-        return str(self.discs)
+        for i in range(n_discs - 1, -1, -1):  # Descending order to start with top tower. i.e n_discs = 5. The loop works in the order: 4, 3, 2, 1, 0.
+            if i >= len(self.discs):
+                self.tower_representation += self.fill_row(n_discs, 0)  # If the iteration is higher than the tower length means that is a void row, then we pass trough a zero value as the number
+            else:
+                self.tower_representation += self.fill_row(n_discs, self.discs[i])
 
+        return self.tower_representation
 
+    def fill_row(self, n_discs, disc_value):
+        """ le añado las almohadillas segun el input, entonces se le añade la pipe
+        y se le añaden las almohadillas de la derecha,
+        seguidamente utilizamos el metodo .center() que genera un padding teniendo en cuenta
+        el numero total de caracteres que debe tener la string.
 
-"""
-    def disc_as_string_2(self, size):
-        disc = ''
-        if size > 0:
-            for j in range(size) * 2:
-                disc += '#'
-                if j == size:
-                    disc += '|'
-            disc += '\n'
-        else:
-            disc = "...|...\n"
-"""
+        :param n_discs: the total amount of discs
+        :param disc_value: the current value for the row
+        :return: a row with the specifications
+        """
+
+        self.string_pads = ""
+        self.number_of_pipes = 1
+        self.double_val = 2
+
+        for i in range(disc_value):
+            self.string_pads += "#"
+
+        self.row = self.string_pads + "|"
+
+        self.row += self.string_pads
+
+        self.row = self.row.center((n_discs * self.double_val) + self.number_of_pipes, ".")
+
+        return self.row
 
