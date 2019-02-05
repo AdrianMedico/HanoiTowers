@@ -31,7 +31,8 @@ class State:
         self.target = target
         self.n_discs = n_discs
 
-        self.towers = []
+        self.towers = towers
+
 
         # How the towers will be stored? Directly? Is that a good idea?
         #raise NotImplementedError()
