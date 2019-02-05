@@ -121,6 +121,7 @@ class HanoiGame:
 
         # Finally reinitialize the towers
         self.towers = [Tower(), Tower(), Tower()]
+        self.fill_origin_tower(self.current_discs)
 
     def _solve_rec(self, n_discs, source, target, aux, depth=0):
         """
@@ -195,8 +196,8 @@ class HanoiGame:
 
         :return: A string with the representation of the current state of the game in the requested format
         """
-
-        return self.states[len(self.states)-1]
+        aux = self.states[len(self.states)-1]
+        return str(aux)
 
     def fill_origin_tower(self, n_discs):
         """
@@ -207,6 +208,8 @@ class HanoiGame:
         """
         for i in range(n_discs, 0, -1):
             self.towers[0].push_disc(i)
-            print()
+
+        #self.states.append(State(len(self.states) + 1, 0, 0, 0, 0, self.towers, self.current_discs))
+
 
 
