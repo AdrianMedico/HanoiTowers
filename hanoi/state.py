@@ -1,4 +1,5 @@
 
+
 class State:
     """
     Class for storing and managing Hanoi game states.
@@ -66,8 +67,8 @@ class State:
 
         self.state_repr = ""
 
-        for i in range(self.n_discs - 1, -1, -1):  # foreach row
-            for tower in self.towers:  # foreach tower
+        for i in range(self.n_discs - 1, -1, -1):  # for each row
+            for tower in self.towers:  # for each tower
                 if i >= len(tower.discs):
                     self.state_repr += tower.fill_row(self.n_discs, 0)
                     self.state_repr += " "
