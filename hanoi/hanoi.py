@@ -209,7 +209,7 @@ class HanoiGame:
         for i in range(n_discs, 0, -1):
             self.towers[0].push_disc(i)
 
-        #self.states.append(State(len(self.states) + 1, 0, 0, 0, 0, self.towers, self.current_discs))
+        self.states.append(State(len(self.states) + 1, 0, 0, 0, 0, self.towers, self.current_discs))
 
 
 

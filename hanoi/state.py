@@ -1,5 +1,3 @@
-from .hanoi_exception import HanoiException
-
 
 class State:
     """
