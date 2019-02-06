@@ -1,4 +1,4 @@
-
+from hanoi.tower import Tower
 
 class State:
     """
@@ -30,11 +30,20 @@ class State:
         self.target = target
         self.n_discs = n_discs
 
-        self.towers = towers
+        self.towers = []
+
+        # Utilizar solo listas, dejar a parte las torres.!!!!
+        for tower in towers:
+            self.towers.append(tower.as_list())
 
 
-        # How the towers will be stored? Directly? Is that a good idea?
-        #raise NotImplementedError()
+        """
+        count = 0
+        n_towers = 3
+        while count < n_towers:
+            self.towers[count].discs = towers[count].as_list()
+            count += 1
+        """
 
     def get_tower(self, idx):
         """
@@ -53,9 +62,8 @@ class State:
 
         :return: A string with the internal representation of the state.
         """
-        rep = str(self.n_discs), self.towers.__str__(), str(self.depth), str(self.move_id), str(self.source), str(self.target)
-
-        return rep
+        #rep = str(self.n_discs), self.towers.__str__(), str(self.depth), str(self.move_id), str(self.source), str(self.target)
+        pass
 
     def __str__(self):
         """
@@ -69,13 +77,39 @@ class State:
 
         for i in range(self.n_discs - 1, -1, -1):  # for each row
             for tower in self.towers:  # for each tower
-                if i >= len(tower.discs):
-                    self.state_repr += tower.fill_row(self.n_discs, 0)
+                if i >= len(tower):
+                    self.state_repr += self.fill_row(self.n_discs, 0)
                     self.state_repr += " "
                 else:
-                    self.state_repr += tower.fill_row(self.n_discs, tower.discs[i])
+                    self.state_repr += self.fill_row(self.n_discs, tower[i])
                     self.state_repr += " "
 
             self.state_repr += '\n'
 
         return self.state_repr
+
+    def fill_row(self, n_discs, disc_value):
+        """ le añado las almohadillas segun el input, entonces se le añade la pipe
+        y se le añaden las almohadillas de la derecha,
+        seguidamente utilizamos el metodo .center() que genera un padding teniendo en cuenta
+        el numero total de caracteres que debe tener la string.
+
+        :param n_discs: the total amount of discs
+        :param disc_value: the current value for the row
+        :return: a row with the specifications
+        """
+
+        self.string_pads = ""
+        self.number_of_pipes = 1
+        self.double_val = 2
+
+        for i in range(disc_value):
+            self.string_pads += "#"
+
+        self.row = self.string_pads + "|"
+
+        self.row += self.string_pads
+
+        self.row = self.row.center((n_discs * self.double_val) + self.number_of_pipes, ".")
+
+        return self.row

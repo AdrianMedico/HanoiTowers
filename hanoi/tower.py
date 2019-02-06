@@ -43,9 +43,6 @@ class Tower:
         else:
             return self.discs.pop()
 
-    '''
-        Inserta un disco encima de la torre.
-    '''
     def push_disc(self, disc):
         """
         Adds a disc to the top of the tower.
@@ -67,7 +64,7 @@ class Tower:
 
         :return: A list containing the discs of the tower.
         """
-        return self.discs
+        return self.discs.copy()
 
     def __repr__(self):
         """

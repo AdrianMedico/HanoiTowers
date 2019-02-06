@@ -129,8 +129,6 @@ class HanoiGame:
 
         return state
 
-
-
     def _solve(self):
         """
         Generates and stores the optimal solution, reinitializing the towers afterwards.
@@ -192,7 +190,7 @@ class HanoiGame:
 
         :return: True if the game is finished, False otherwise.
         """
-
+        pass
         """
         No se como escribirlo en código, pero la idea que tengo es usar un if/else donde el if compruebe si la función 
         finaliza donde debe finalizar haga un return True y de la misma con el else, si la función no acaba como debería
@@ -223,7 +221,7 @@ class HanoiGame:
 
         :return: A string with the representation of the current state of the game in the requested format
         """
-        aux = self.states[len(self.states)-1]
+        aux = self.states[len(self.states) - 1]
         return str(aux)
 
     def fill_origin_tower(self, n_discs):
