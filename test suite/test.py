@@ -59,7 +59,6 @@ def check_total_states(discs=10):
 
     # Initial state plus 2^n - 1 states with moves
     hanoi_game = HanoiGame(discs)
-    print(hanoi_game.get_n_states())
     assert (hanoi_game.get_n_states() == 1024)
 
 
@@ -100,13 +99,13 @@ def check_output():
 
     # Note that we are accessing the first state. No moves have been done yet, So no header or last move line needs to be present
     expected = """
-    ....#|#.... .....|..... .....|..... 
-    ...##|##... .....|..... .....|..... 
-    ..###|###.. .....|..... .....|..... 
-    .####|####. .....|..... .....|..... 
-    #####|##### .....|..... .....|..... 
-      Tower 1     Tower 2     Tower 3   
-    """
+....#|#.... .....|..... .....|..... 
+...##|##... .....|..... .....|..... 
+..###|###.. .....|..... .....|..... 
+.####|####. .....|..... .....|..... 
+#####|##### .....|..... .....|..... 
+  Tower 1     Tower 2     Tower 3   
+"""
 
     hanoi_game = HanoiGame(5)
     state = hanoi_game.get_state(0)
@@ -118,21 +117,40 @@ def show_standard_optimal_state():
 
     # Show a standard state from the optimal solution
     expected = """
-    Move id 7 Rec Depth 3
-    Last move: 1 Disk, from 1 to 3
-    ...|... ...|... ..#|#.. 
-    ...|... ...|... .##|##. 
-    ...|... ...|... ###|### 
-    Tower 1 Tower 2 Tower 3 
-    """
+Move id 7 Rec Depth 3
+Last move: 1 Disk, from 1 to 3
+...|... ...|... ..#|#.. 
+...|... ...|... .##|##. 
+...|... ...|... ###|### 
+Tower 1 Tower 2 Tower 3 
+"""
     hanoi_game = HanoiGame(3)
     state = hanoi_game.get_state(7)
     assert (expected == str(state))
 
 
+def show_current_playing():
+    #       TEST NUMBER 12
+
+    # Show the current state, when playing manually
+    hanoi_game = HanoiGame(3)
+    hanoi_game.move(0, 2)
+    hanoi_game.move(0, 1)
+
+    state = hanoi_game.get_current_state()
+
+    expected = """
+...|... ...|... ...|... 
+...|... ...|... ...|... 
+###|### .##|##. ..#|#.. 
+Tower 1 Tower 2 Tower 3 
+"""
+    assert (expected == str(state))
+
+
 if __name__ == '__main__':
 
-    """
+
     negative_disc_input()
     check_wrong_finished_game()
     check_wrong_movement()
@@ -142,10 +160,10 @@ if __name__ == '__main__':
     retrieve_tower_from_state()
     check_pop_from_empty_tower()
     check_pushed_discs()
-    
-    
-    """
-    #check_output()
+    check_output()
     show_standard_optimal_state()
+    
+
+    show_current_playing()
 
 

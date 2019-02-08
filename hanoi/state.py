@@ -62,23 +62,27 @@ class State:
 
         :return: A string with the internal representation of the state.
         """
-        #rep = str(self.n_discs), self.towers.__str__(), str(self.depth), str(self.move_id), str(self.source), str(self.target)
+
         pass
 
     def __str__(self):
         """
         Returns a string with the representation of the state in the requested format.
-
+        Implementation:
+        initialize the string state_repr, then check if the current move_id is part of the optimal solution and add
+        a header with information.
+        then iterate over each row and check if the current row in bigger than the length of the tower,
+        if is true is a void row (..|..)
+        else:
         :return: A string with the representation of the state in the requested format
 
         """
         # Add a header to this states
-        self.state_repr = ""
-        if 1 < self.move_id < 2**self.n_discs:
+        self.state_repr = "\n"
 
-            self.state_repr += "\nMove id {} Rec Depth {}\n".format(self.move_id, self.depth + 1)
-            self.state_repr += "Last move: {} Disk, from {} to {}".format(self.moved_disc, self.source + 1, self.target + 1)
-        self.state_repr += "\n    "
+        if 0 < self.move_id < 2**self.n_discs:
+            self.state_repr += "Move id {} Rec Depth {}\n".format(self.move_id, self.depth + 1)
+            self.state_repr += "Last move: {} Disk, from {} to {}\n".format(self.moved_disc, self.source + 1, self.target + 1)
 
         for i in range(self.n_discs - 1, -1, -1):  # for each row
             for tower in self.towers:  # for each tower
@@ -89,12 +93,12 @@ class State:
                     self.state_repr += self.fill_row(self.n_discs, tower[i])
                     self.state_repr += " "
 
-            self.state_repr += '\n    '
+            self.state_repr += '\n'
         for i in range(1, len(self.towers) + 1):
             self.state_repr += self.fill_blank_spaces(self.n_discs, "Tower {}".format(i), i)
 
-        self.state_repr += '   \n    '
-        # self.state_repr += '  Tower 1     Tower 2     Tower 3   \n    '
+        self.state_repr += '\n'
+
         return self.state_repr
 
     def fill_row(self, n_discs, disc_value):
@@ -134,10 +138,7 @@ class State:
 
         length = n_discs * 2 + 1  # represents the leng of the string
         string = string.center(length, ' ')
-        if extra_space < 3:
-            string += ' '
-        else:
-            string = string.rstrip()
+        string += ' '
         return string
 
 
