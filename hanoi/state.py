@@ -72,8 +72,13 @@ class State:
         :return: A string with the representation of the state in the requested format
 
         """
-
+        # Add a header to this states
         self.state_repr = ""
+        if 1 < self.move_id < 2**self.n_discs:
+
+            self.state_repr += "\nMove id {} Rec Depth {}\n".format(self.move_id, self.depth + 1)
+            self.state_repr += "Last move: {} Disk, from {} to {}".format(self.moved_disc, self.source + 1, self.target + 1)
+        self.state_repr += "\n    "
 
         for i in range(self.n_discs - 1, -1, -1):  # for each row
             for tower in self.towers:  # for each tower
@@ -84,8 +89,12 @@ class State:
                     self.state_repr += self.fill_row(self.n_discs, tower[i])
                     self.state_repr += " "
 
-            self.state_repr += '\n'
+            self.state_repr += '\n    '
+        for i in range(1, len(self.towers) + 1):
+            self.state_repr += self.fill_blank_spaces(self.n_discs, "Tower {}".format(i), i)
 
+        self.state_repr += '   \n    '
+        # self.state_repr += '  Tower 1     Tower 2     Tower 3   \n    '
         return self.state_repr
 
     def fill_row(self, n_discs, disc_value):
@@ -99,17 +108,36 @@ class State:
         :return: a row with the specifications
         """
 
-        self.string_pads = ""
-        self.number_of_pipes = 1
-        self.double_val = 2
+        string_pads = ""
+        number_of_pipes = 1
+        double_val = 2
 
         for i in range(disc_value):
-            self.string_pads += "#"
+            string_pads += "#"
 
-        self.row = self.string_pads + "|"
+        row = string_pads + "|"
 
-        self.row += self.string_pads
+        row += string_pads
 
-        self.row = self.row.center((n_discs * self.double_val) + self.number_of_pipes, ".")
+        row = row.center((n_discs * double_val) + number_of_pipes, ".")
 
-        return self.row
+        return row
+
+    def fill_blank_spaces(self, n_discs, string, extra_space=0):
+        """
+        Add blank spaces when for the strings,
+        :param n_discs:
+        :param string:
+        :param extra_space:
+        :return:
+        """
+
+        length = n_discs * 2 + 1  # represents the leng of the string
+        string = string.center(length, ' ')
+        if extra_space < 3:
+            string += ' '
+        else:
+            string = string.rstrip()
+        return string
+
+

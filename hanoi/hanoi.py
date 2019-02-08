@@ -35,10 +35,11 @@ class HanoiGame:
 
         # 2.- Initialize the structure attributes (Add the code after this comment)
         self.states = []  # Initialize the states list
+        self.optimal_solution = ()  # Initialize a list to save the optimal solution
 
         # 3.- Initialize the towers (Add the code after this comment)
         self.towers = [Tower(), Tower(), Tower()]
-        self.fill_origin_tower(n_discs)
+        self.fill_origin_tower()
 
         # 4.- Solve and store the optimal solution
         self._solve()
@@ -52,12 +53,10 @@ class HanoiGame:
         :param step: The step index in the optimal solution.
         :return: The state at the requested step in the optimal solution.
         """
-        length = len(self.steps)
+        length = len(self.states)
         if step > length or step < 0:
-            raise HanoiException("The introduced step should be between 0 and " + length)
-        """
-        En esta función falta que devuelva algo, solo tenemos  un condicional y una exception pero sin devolver nada.
-        """
+            raise HanoiException("The introduced step should be between 0 and " + str(length))
+        return self.states[step]
 
     def get_n_discs(self):
         """
@@ -83,7 +82,7 @@ class HanoiGame:
         :return: The number of states of the optimal solution.
         """
 
-        return len(self.states)
+        return (len(self.states) - 1)
 
     def move(self, source, target, move_id=None, depth=None):
         """
@@ -127,6 +126,8 @@ class HanoiGame:
             self.towers[source].push_disc(disc)
             raise
 
+        self.states.append(state)
+
         return state
 
     def _solve(self):
@@ -137,16 +138,22 @@ class HanoiGame:
         self._solve_rec(self.current_discs, 0, 2, 1, depth=0)
 
         # Finally reinitialize the towers
+
         """
         self.towers = [Tower(), Tower(), Tower()]
-        self.fill_origin_tower(self.current_discs)
         """
-
+        """
         while not self.towers[2].is_empty():
             self.towers[2].pop_disc()
 
         for i in reversed(range(self.current_discs)):
             self.towers[0].push_disc(i + 1)
+        """
+        # At this point we decided to separate the optimal
+        #  solution from the states list.
+        self.optimal_solution = tuple(self.states)
+
+        self.fill_origin_tower()
 
     def _solve_rec(self, n_discs, source, target, aux, depth=0):
         """
@@ -161,11 +168,10 @@ class HanoiGame:
 
         if n_discs == 0:
             return 0
-            #self.states.append(self.move(source, target, len(self.states) + 1, depth))
 
         else:
             self._solve_rec(n_discs - 1, source, aux, target, depth + 1)
-            self.states.append(self.move(source, target, move_id=len(self.states), depth=depth))
+            self.move(source, target, move_id=len(self.states), depth=depth)
             self._solve_rec(n_discs - 1, aux, target, source, depth + 1)
 
     def print_optimal_state(self, step):
@@ -181,7 +187,7 @@ class HanoiGame:
         """
         Prints all the states of the optimal solution in the required format.
         """
-        for state in self.states:
+        for state in self.optimal_solution:
             print(state.__str__())
 
     def is_finished(self):
@@ -190,12 +196,10 @@ class HanoiGame:
 
         :return: True if the game is finished, False otherwise.
         """
-        pass
-        """
-        No se como escribirlo en código, pero la idea que tengo es usar un if/else donde el if compruebe si la función 
-        finaliza donde debe finalizar haga un return True y de la misma con el else, si la función no acaba como debería
-        hacer un return False
-        """
+        if len(self.towers[2].discs) == self.current_discs:
+            return True
+        else:
+            return False
 
     def get_current_state(self):
         """
@@ -212,8 +216,8 @@ class HanoiGame:
 
         :return: A string with the internal representation of the game.
         """
+        pass
 
-        #raise NotImplementedError()
 
     def __str__(self):
         """
@@ -224,15 +228,23 @@ class HanoiGame:
         aux = self.states[len(self.states) - 1]
         return str(aux)
 
-    def fill_origin_tower(self, n_discs):
+    def fill_origin_tower(self):
         """
         internal function that fill the origin tower with the number of discs that the user request
         :param tower: the object tower
         :param n_discs: the number of discs
         :return: the tower filled with discs
         """
+
+        while not self.towers[2].is_empty():
+            self.towers[2].pop_disc()
+
+        for i in reversed(range(self.current_discs)):
+            self.towers[0].push_disc(i + 1)
+        """
         for i in range(n_discs, 0, -1):
             self.towers[0].push_disc(i)
+        """
 
         self.states.append(State(len(self.states) + 1, 0, 0, 0, 0, self.towers, self.current_discs))
 
