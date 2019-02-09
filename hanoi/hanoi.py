@@ -35,7 +35,6 @@ class HanoiGame:
 
         # 2.- Initialize the structure attributes (Add the code after this comment)
         self.states = []  # Initialize the states list
-        self.optimal_solution = ()  # Initialize a list to save the optimal solution
 
         # 3.- Initialize the towers (Add the code after this comment)
         self.towers = [Tower(), Tower(), Tower()]
@@ -82,7 +81,7 @@ class HanoiGame:
         :return: The number of states of the optimal solution.
         """
 
-        return (len(self.states) - 1)
+        return len(self.states) - 1
 
     def move(self, source, target, move_id=0, depth=None):
         """
@@ -121,13 +120,6 @@ class HanoiGame:
 
         self._solve_rec(self.current_discs, 0, 2, 1, depth=0)
 
-        # Finally reinitialize the towers
-
-
-        # At this point we decided to separate the optimal
-        #  solution from the states list.
-        self.optimal_solution = tuple(self.states)
-
         self.fill_origin_tower()
 
     def _solve_rec(self, n_discs, source, target, aux, depth=0):
@@ -161,9 +153,11 @@ class HanoiGame:
     def print_optimal_solution(self):
         """
         Prints all the states of the optimal solution in the required format.
+        using 2^n without -1 to stop the printing because we start the id counter in 1.
         """
-        for state in self.optimal_solution:
-            print(state.__str__())
+
+        for i in range(1, 2**self.current_discs):
+            print(self.states[i])
 
     def is_finished(self):
         """
@@ -205,8 +199,6 @@ class HanoiGame:
     def fill_origin_tower(self):
         """
         internal function that fill the origin tower with the number of discs that the user request
-        :param tower: the object tower
-        :param n_discs: the number of discs
         :return: the tower filled with discs
         """
 
@@ -221,6 +213,3 @@ class HanoiGame:
         """
 
         self.states.append(State(len(self.states), 0, 0, 0, 0, self.towers, self.current_discs))
-
-
-

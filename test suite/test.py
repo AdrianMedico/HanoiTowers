@@ -150,7 +150,6 @@ Tower 1 Tower 2 Tower 3
 
 if __name__ == '__main__':
 
-
     negative_disc_input()
     check_wrong_finished_game()
     check_wrong_movement()
@@ -162,8 +161,6 @@ if __name__ == '__main__':
     check_pushed_discs()
     check_output()
     show_standard_optimal_state()
-    
-
     show_current_playing()
 
 

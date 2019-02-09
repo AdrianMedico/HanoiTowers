@@ -1,5 +1,3 @@
-from hanoi.tower import Tower
-
 class State:
     """
     Class for storing and managing Hanoi game states.
