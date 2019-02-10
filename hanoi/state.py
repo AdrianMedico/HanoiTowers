@@ -125,7 +125,7 @@ class State:
 
         return row
 
-    def fill_blank_spaces(self, n_discs, string, extra_space=0):
+    def fill_blank_spaces(self, n_discs, string):
         """
         Add blank spaces when for the strings,
         :param n_discs:
